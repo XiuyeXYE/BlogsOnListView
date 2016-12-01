@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="blue">        #00f</color>
+    <color name="black">        #000</color>
+    <color name="DarkBlue">        #00008B</color>
+    <color name="DarkCyan">        #008B8B</color>
+    <color name="DarkMagenta">         #8B008B</color>
+    <color name="DarkRed">#8B0000</color>
+    <color name="LightGreen">#90EE90</color>
+    <color name="red">    #f00</color>
+    <color name="Orange">    #FFA500</color>
+    <color name="Yellow">    #FFFF00</color>
+    <color name="DarkViolet">    #9400D3</color>
+    <color name="MedSpringGreen">   #00FA9A</color>
+
+
+</resources>
