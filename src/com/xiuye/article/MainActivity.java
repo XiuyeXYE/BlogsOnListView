@@ -24,53 +24,63 @@ public class MainActivity extends Activity {
 
 	private static int[] colors = { R.color.DarkCyan, R.color.MedSpringGreen, R.color.Orange, };
 
+
+	private class ListDataAdapter extends BaseAdapter {
+
+		private String[] titles;
+
+		public ListDataAdapter(String[] titles) {
+			this.titles = titles;
+		}
+
+		@Override
+		public int getCount() {
+			return titles.length;
+		}
+
+		@Override
+		public Object getItem(int position) {
+			return null;
+		}
+
+		@Override
+		public long getItemId(int position) {
+			return 0;
+		}
+
+		@Override
+		public View getView(int position, View convertView, ViewGroup parent) {
+			LinearLayout layout = null;
+			int colorIndex = position % colors.length;
+			String[] tf = titles[position].split("-----");
+			TextView tv = null;
+			if (convertView == null) {
+				layout = new LinearLayout(MainActivity.this);
+				layout.setOrientation(LinearLayout.HORIZONTAL);
+				layout.setPadding(10, 10, 10, 10);
+				tv = new TextView(MainActivity.this);
+
+				tv.setTextSize(24.0f);
+				layout.addView(tv);
+
+			} else {
+				layout = (LinearLayout) convertView;
+				tv = (TextView) layout.getChildAt(0);
+
+			}
+
+			tv.setTextColor(MainActivity.this.getResources().getColor(colors[colorIndex]));
+			tv.setText(tf[0]);
+			tv.setTag(tf[1]);
+
+			return layout;
+		}
+
+	}
+
 	private void createListView() {
 		final String[] titles = this.getResources().getStringArray(R.array.articleTitles);
-		BaseAdapter ba = new BaseAdapter() {
-
-			@Override
-			public View getView(int position, View convertView, ViewGroup parent) {
-				LinearLayout layout = null;
-				int colorIndex = position % colors.length;
-				String[] tf = titles[position].split("-----");
-				TextView tv = null;
-				if (convertView == null) {
-					layout = new LinearLayout(MainActivity.this);
-					layout.setOrientation(LinearLayout.HORIZONTAL);
-					layout.setPadding(10, 10, 10, 10);
-					tv = new TextView(MainActivity.this);
-
-					tv.setTextSize(24.0f);
-					layout.addView(tv);
-
-				} else {
-					layout = (LinearLayout) convertView;
-					tv = (TextView) layout.getChildAt(0);
-
-				}
-
-				tv.setTextColor(MainActivity.this.getResources().getColor(colors[colorIndex]));
-				tv.setText(tf[0]);
-				tv.setTag(tf[1]);
-
-				return layout;
-			}
-
-			@Override
-			public long getItemId(int position) {
-				return 0;
-			}
-
-			@Override
-			public Object getItem(int position) {
-				return null;
-			}
-
-			@Override
-			public int getCount() {
-				return titles.length;
-			}
-		};
+		BaseAdapter ba = new ListDataAdapter(titles);
 		ListView lv = (ListView) this.findViewById(R.id.titles);
 		lv.setAdapter(ba);
 		lv.setOnItemClickListener(new OnItemClickListener() {
